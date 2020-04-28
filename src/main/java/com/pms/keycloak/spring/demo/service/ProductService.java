@@ -15,32 +15,17 @@
  */
 package com.pms.keycloak.spring.demo.service;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.List;
-import javax.validation.constraints.NotNull;
-import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 
 @Component
 public class ProductService {
 
-    private final KeycloakRestTemplate template;
-
-    @NotNull
-    @Value("${product.service.url}")
-    private String endpoint;
-
-    public ProductService(KeycloakRestTemplate template) {
-        this.template = template;
-    }
-
     public List<String> getProducts() {
-//        ResponseEntity<String[]> response = template.getForEntity(endpoint, String[].class);
-        return Arrays.asList(new String[]{"TEST"});
-//        return Arrays.asList(response.getBody());
+        return Arrays.asList(new String[]{"Product-1","Product-2"});
+
     }
 
 }
