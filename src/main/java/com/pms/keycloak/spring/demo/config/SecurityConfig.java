@@ -7,9 +7,10 @@ package com.pms.keycloak.spring.demo.config;
  
 import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
-import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
+import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
 import org.keycloak.adapters.springsecurity.client.KeycloakClientRequestFactory;
 import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
+import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,7 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
  
 /**
  * Application security configuration.
@@ -31,11 +33,15 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = KeycloakSecurityComponents.class)
-public class SecurityConfig extends RoleAddKeycloakWebSecurityConfigurerAdapter {
+/* Keycloak의 Role을 사용하지 않는 경우 사용되는 소스 */
+//public class SecurityConfig extends RoleAddKeycloakWebSecurityConfigurerAdapter {
+public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter{
  
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        RoleAddKeycloakAuthenticationProvider keycloakAuthenticationProvider = roleAddKeycloakAuthenticationProvider();
+    	/* Keycloak의 Role을 사용하지 않는 경우 사용되는 소스 */
+        //RoleAddKeycloakAuthenticationProvider keycloakAuthenticationProvider = roleAddKeycloakAuthenticationProvider();
+		KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
         SimpleAuthorityMapper grantedAuthorityMapper = new SimpleAuthorityMapper();
         grantedAuthorityMapper.setPrefix("ROLE_");
         grantedAuthorityMapper.setConvertToUpperCase(true);
