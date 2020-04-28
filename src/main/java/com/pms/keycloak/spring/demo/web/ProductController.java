@@ -46,8 +46,8 @@ public class ProductController {
     public String handleCustomersRequest(Principal principal, Model model) {
         model.addAttribute("products", productService.getProducts());
         model.addAttribute("principal",  principal);
-        String logoutUri = KeycloakUriBuilder.fromUri("http://localhost:8081/auth").path(ServiceUrlConstants.TOKEN_SERVICE_LOGOUT_PATH)
-                .queryParam("redirect_uri", "http://localhost:8080/products").build("quickstart").toString();
+        String logoutUri = KeycloakUriBuilder.fromUri("http://localhost:8080/auth").path(ServiceUrlConstants.TOKEN_SERVICE_LOGOUT_PATH)
+                .queryParam("redirect_uri", "http://localhost:8081/products").build("quickstart").toString();
         model.addAttribute("logout",  logoutUri);
         return "products";
     }
