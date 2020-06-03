@@ -12,6 +12,7 @@
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
+	<packaging>pom</packaging>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -68,4 +69,8 @@
 		</plugins>
 	</build>
 
+	<modules>
+		<module>spring-security</module>
+		<module>spring-security-resource</module>
+	</modules>
 </project>

@@ -1,0 +1,18 @@
+server:
+  port: 8082
+
+debug:
+  true
+
+spring:
+  freemarker:
+    suffix: .ftl
+
+keycloak:
+  enabled: true
+  realm: spring-security-demo
+  auth-server-url: http://localhost:8080/auth
+  ssl-required: external
+  resource: spring-security-demo-app
+  public-client: true
+  
